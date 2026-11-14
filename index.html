@@ -18,19 +18,19 @@
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
 
     <!-- Header -->
-    <header class="bg-indigo-600 text-white shadow-md">
+    <header class="bg-orange-600 text-white shadow-md">
         <div class="max-w-4xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-3">
             <div class="flex items-center space-x-3">
-                <div class="bg-white text-indigo-600 p-2.5 rounded-xl shadow">
+                <div class="bg-white text-orange-600 p-2.5 rounded-xl shadow">
                     <i class="fa-solid fa-dumbbell text-xl"></i>
                 </div>
                 <div>
                     <h1 class="text-xl font-bold tracking-tight">Fitness Goal Tracker</h1>
-                    <p class="text-xs text-indigo-200">Daily Exercise & Progress Hub</p>
+                    <p class="text-xs text-orange-200">Daily Exercise & Progress Hub</p>
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                <button onclick="openCloudModal()" class="bg-indigo-700 hover:bg-indigo-800 text-indigo-100 text-xs font-medium px-3 py-2 rounded-lg border border-indigo-500 transition flex items-center gap-1.5">
+                <button onclick="openCloudModal()" class="bg-orange-700 hover:bg-orange-800 text-orange-100 text-xs font-medium px-3 py-2 rounded-lg border border-orange-500 transition flex items-center gap-1.5">
                     <i class="fa-solid fa-cloud"></i> Sync & GitHub Guide
                 </button>
                 <div id="syncStatus" class="text-xs px-2.5 py-1 rounded-full bg-emerald-500 text-white font-medium flex items-center gap-1">
@@ -43,7 +43,7 @@
     <!-- Navigation Tabs -->
     <nav class="bg-white border-b border-slate-200 sticky top-0 z-10 shadow-sm">
         <div class="max-w-4xl mx-auto px-4 flex space-x-6 overflow-x-auto">
-            <button onclick="switchTab('today')" id="nav-today" class="py-3 px-1 border-b-2 font-semibold text-sm transition border-indigo-600 text-indigo-600 whitespace-nowrap">
+            <button onclick="switchTab('today')" id="nav-today" class="py-3 px-1 border-b-2 font-semibold text-sm transition border-orange-600 text-orange-600 whitespace-nowrap">
                 <i class="fa-solid fa-calendar-day mr-1.5"></i> Today's Goals & Chart
             </button>
             <button onclick="switchTab('pool')" id="nav-pool" class="py-3 px-1 border-b-2 font-semibold text-sm transition border-transparent text-slate-500 hover:text-slate-700 whitespace-nowrap">
@@ -63,32 +63,32 @@
             <!-- Date & Header Controls -->
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <span id="currentDateDisplay" class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-md">Today</span>
+                    <span id="currentDateDisplay" class="text-xs font-bold uppercase tracking-wider text-orange-600 bg-orange-50 px-2.5 py-1 rounded-md">Today</span>
                     <h2 class="text-2xl font-bold text-slate-900 mt-1">Daily Progress Tracker</h2>
                     <p class="text-sm text-slate-500">Check off your sets and reps as you complete them throughout the day.</p>
                 </div>
                 <div class="flex items-center gap-2 w-full md:w-auto">
-                    <input type="date" id="selectedDateInput" onchange="changeActiveDate()" class="bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-xl px-3 py-2 font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <button onclick="openGoalModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm px-4 py-2 rounded-xl shadow transition flex items-center gap-2 whitespace-nowrap">
+                    <input type="date" id="selectedDateInput" onchange="changeActiveDate()" class="bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-xl px-3 py-2 font-medium focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    <button onclick="openGoalModal()" class="bg-orange-600 hover:bg-orange-700 text-white font-medium text-sm px-4 py-2 rounded-xl shadow transition flex items-center gap-2 whitespace-nowrap">
                         <i class="fa-solid fa-plus"></i> Set Today's Goals
                     </button>
                 </div>
             </div>
 
             <!-- Overall Progress Card -->
-            <div class="bg-gradient-to-br from-indigo-900 to-slate-900 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
+            <div class="bg-gradient-to-br from-orange-900 to-slate-900 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
                 <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl">
                     <i class="fa-solid fa-fire"></i>
                 </div>
                 <div class="relative z-10">
                     <div class="flex justify-between items-center mb-3">
-                        <span class="text-indigo-200 font-medium text-sm">Overall Daily Completion</span>
-                        <span id="overallPercentage" class="text-2xl font-black text-indigo-300">0%</span>
+                        <span class="text-orange-200 font-medium text-sm">Overall Daily Completion</span>
+                        <span id="overallPercentage" class="text-2xl font-black text-orange-300">0%</span>
                     </div>
                     <div class="w-full bg-slate-800/80 rounded-full h-3.5 p-0.5 overflow-hidden border border-slate-700">
-                        <div id="overallProgressBar" class="bg-gradient-to-r from-indigo-500 to-emerald-400 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                        <div id="overallProgressBar" class="bg-gradient-to-r from-orange-500 to-amber-400 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
                     </div>
-                    <div class="flex justify-between items-center mt-3 text-xs text-indigo-200">
+                    <div class="flex justify-between items-center mt-3 text-xs text-orange-200">
                         <span id="completedSummaryText">0 of 0 goals fully completed</span>
                         <span id="proportionalSummaryText">0% total progress credit</span>
                     </div>
@@ -98,7 +98,7 @@
             <!-- Chart Section -->
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
                 <div class="flex justify-between items-center mb-4">
-                    <h3 class="font-bold text-slate-800 text-base"><i class="fa-solid fa-chart-column mr-2 text-indigo-600"></i>Exercise Progress Breakdown</h3>
+                    <h3 class="font-bold text-slate-800 text-base"><i class="fa-solid fa-chart-column mr-2 text-orange-600"></i>Exercise Progress Breakdown</h3>
                     <span class="text-xs text-slate-400">Completion % per Exercise</span>
                 </div>
                 <div class="relative h-64 w-full">
@@ -109,7 +109,7 @@
             <!-- Today's Goal Checklist -->
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 space-y-4">
                 <div class="flex justify-between items-center">
-                    <h3 class="font-bold text-slate-800 text-base"><i class="fa-solid fa-list-check mr-2 text-indigo-600"></i>Today's Exercise Checklist</h3>
+                    <h3 class="font-bold text-slate-800 text-base"><i class="fa-solid fa-list-check mr-2 text-orange-600"></i>Today's Exercise Checklist</h3>
                     <span id="goalCountBadge" class="text-xs bg-slate-100 text-slate-600 font-medium px-2.5 py-1 rounded-full">0 exercises</span>
                 </div>
                 <div id="todayGoalsList" class="divide-y divide-slate-100">
@@ -125,7 +125,7 @@
                     <h2 class="text-2xl font-bold text-slate-900">Exercise Pool</h2>
                     <p class="text-sm text-slate-500">Manage your master list of favorite exercises.</p>
                 </div>
-                <button onclick="openNewExerciseModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm px-4 py-2 rounded-xl shadow transition flex items-center gap-2">
+                <button onclick="openNewExerciseModal()" class="bg-orange-600 hover:bg-orange-700 text-white font-medium text-sm px-4 py-2 rounded-xl shadow transition flex items-center gap-2">
                     <i class="fa-solid fa-plus"></i> Add New Exercise
                 </button>
             </div>
@@ -144,7 +144,7 @@
 
             <!-- Weekly Consistency Chart -->
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
-                <h3 class="font-bold text-slate-800 text-base mb-4"><i class="fa-solid fa-calendar-week mr-2 text-indigo-600"></i>Last 7 Days Consistency (%)</h3>
+                <h3 class="font-bold text-slate-800 text-base mb-4"><i class="fa-solid fa-calendar-week mr-2 text-orange-600"></i>Last 7 Days Consistency (%)</h3>
                 <div class="relative h-60 w-full">
                     <canvas id="weeklyChart"></canvas>
                 </div>
@@ -176,7 +176,7 @@
             </div>
             <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-end gap-3">
                 <button onclick="closeGoalModal()" class="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-xl transition">Cancel</button>
-                <button onclick="saveDailyGoals()" class="px-5 py-2 text-sm font-medium bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow transition">Save Goals</button>
+                <button onclick="saveDailyGoals()" class="px-5 py-2 text-sm font-medium bg-orange-600 hover:bg-orange-700 text-white rounded-xl shadow transition">Save Goals</button>
             </div>
         </div>
     </div>
@@ -192,11 +192,11 @@
                 <input type="hidden" id="editExerciseId">
                 <div>
                     <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Exercise Name</label>
-                    <input type="text" id="exNameInput" placeholder="e.g. Push-Ups, Jogging, Planks" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <input type="text" id="exNameInput" placeholder="e.g. Push-Ups, Jogging, Planks" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Category</label>
-                    <select id="exCategoryInput" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <select id="exCategoryInput" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
                         <option value="Strength">Strength</option>
                         <option value="Cardio">Cardio</option>
                         <option value="Flexibility">Flexibility</option>
@@ -205,597 +205,4 @@
                 </div>
                 <div>
                     <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Default Unit</label>
-                    <select id="exUnitInput" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                        <option value="Reps">Reps</option>
-                        <option value="Mins">Mins</option>
-                        <option value="Sets">Sets</option>
-                        <option value="Miles">Miles</option>
-                    </select>
-                </div>
-            </div>
-            <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-end gap-3">
-                <button onclick="closeExerciseModal()" class="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-xl transition">Cancel</button>
-                <button onclick="saveExercise()" class="px-5 py-2 text-sm font-medium bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow transition">Save Exercise</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL: Cloud Sync & GitHub Guide -->
-    <div id="cloudModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="px-6 py-4 bg-indigo-900 text-white flex justify-between items-center">
-                <h3 class="font-bold text-lg"><i class="fa-solid fa-cloud mr-2"></i>Cloud Sync & GitHub Guide</h3>
-                <button onclick="closeCloudModal()" class="text-indigo-200 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-            </div>
-            <div class="p-6 overflow-y-auto space-y-4 text-sm text-slate-600 flex-grow">
-                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl">
-                    <h4 class="font-bold text-emerald-800 mb-1"><i class="fa-solid fa-circle-check mr-1.5"></i>Firebase Real-Time Sync Active</h4>
-                    <p class="text-xs text-emerald-700">Your app is connected to Firebase Firestore. Changes on your PC and iPhone sync instantly in real time!</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-slate-800 mb-1">How to Update on GitHub:</h4>
-                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-600">
-                        <li>Save the code above into a file named <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">index.html</code> on your computer.</li>
-                        <li>Go to your repository on <a href="https://github.com" target="_blank" class="text-indigo-600 underline font-medium">github.com</a> (<code class="bg-slate-100 px-1.5 py-0.5 rounded text-slate-800">mnosek611/exercise-tracker</code>).</li>
-                        <li>Click on your existing <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">index.html</code> file, click the pencil icon to <b>Edit</b> (or upload the new file over the old one).</li>
-                        <li>Click <b>Commit changes</b>. GitHub Pages will update your live app within 1 minute!</li>
-                    </ol>
-                </div>
-            </div>
-            <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-end">
-                <button onclick="closeCloudModal()" class="px-5 py-2 text-sm font-medium bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow transition">Got It</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Firebase & Application Logic -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'fitness-goal-tracker-v1';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-            apiKey: "AIzaSyBsO_fGjaW-2XEZpE2sfaKMytrFkl3xENU",
-            authDomain: "exercisetracker-3da7f.firebaseapp.com",
-            projectId: "exercisetracker-3da7f",
-            storageBucket: "exercisetracker-3da7f.firebasestorage.app",
-            messagingSenderId: "890255989158",
-            appId: "1:890255989158:web:ff2babd0dd4d97af5c1767",
-            measurementId: "G-69V8307F8E"
-        };
-
-        let db, auth, userId = 'local-user';
-        let useCloud = true;
-
-        // Default Master Exercise Pool
-        let exercisePool = [
-            { id: 'ex-1', name: 'Push-Ups', category: 'Strength', unit: 'Reps' },
-            { id: 'ex-2', name: 'Squats', category: 'Strength', unit: 'Reps' },
-            { id: 'ex-3', name: 'Plank', category: 'Core', unit: 'Mins' },
-            { id: 'ex-4', name: 'Jogging / Walk', category: 'Cardio', unit: 'Mins' },
-            { id: 'ex-5', name: 'Pull-Ups', category: 'Strength', unit: 'Reps' },
-            { id: 'ex-6', name: 'Stretching', category: 'Flexibility', unit: 'Mins' }
-        ];
-
-        let dailyData = {};
-        let activeDateStr = getLocalDateString(new Date());
-
-        let progressChartInstance = null;
-        let weeklyChartInstance = null;
-
-        window.addEventListener('DOMContentLoaded', async () => {
-            document.getElementById('selectedDateInput').value = activeDateStr;
-            updateDateDisplayHeader();
-
-            try {
-                const app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
-                
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-                userId = auth.currentUser?.uid || 'user-' + Math.random().toString(36).substring(2, 9);
-                
-                document.getElementById('syncStatus').innerHTML = '<span class="w-2 h-2 rounded-full bg-white animate-pulse"></span> Cloud Synced';
-                initFirestoreListeners();
-            } catch (err) {
-                console.warn('Firebase init fallback to local storage:', err);
-                useCloud = false;
-                document.getElementById('syncStatus').innerHTML = '<span class="w-2 h-2 rounded-full bg-amber-400"></span> Local Mode';
-                loadLocalData();
-                renderAll();
-            }
-        });
-
-        function getLocalDateString(date) {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        }
-
-        function updateDateDisplayHeader() {
-            const d = new Date(activeDateStr + 'T00:00:00');
-            const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
-            document.getElementById('currentDateDisplay').textContent = d.toLocaleDateString('en-US', options);
-        }
-
-        function initFirestoreListeners() {
-            if (!db) return;
-            const docRef = doc(db, 'artifacts', appId, 'users', userId, 'fitnessData', 'mainDoc');
-            onSnapshot(docRef, (docSnap) => {
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    if (data.exercisePool) exercisePool = data.exercisePool;
-                    if (data.dailyData) dailyData = data.dailyData;
-                } else {
-                    saveToCloud();
-                }
-                renderAll();
-            }, (error) => {
-                console.warn('Firestore sync error, falling back:', error);
-                loadLocalData();
-                renderAll();
-            });
-        }
-
-        function saveData() {
-            if (useCloud && db) {
-                saveToCloud();
-            } else {
-                saveLocalData();
-            }
-            renderAll();
-        }
-
-        async function saveToCloud() {
-            if (!db) return;
-            try {
-                const docRef = doc(db, 'artifacts', appId, 'users', userId, 'fitnessData', 'mainDoc');
-                await setDoc(docRef, { exercisePool, dailyData });
-            } catch (e) {
-                console.error('Error saving to cloud:', e);
-            }
-        }
-
-        function saveLocalData() {
-            localStorage.setItem('fitness_pool', JSON.stringify(exercisePool));
-            localStorage.setItem('fitness_daily', JSON.stringify(dailyData));
-        }
-
-        function loadLocalData() {
-            const p = localStorage.getItem('fitness_pool');
-            const d = localStorage.getItem('fitness_daily');
-            if (p) exercisePool = JSON.parse(p);
-            if (d) dailyData = JSON.parse(d);
-        }
-
-        window.switchTab = function(tabKey) {
-            ['today', 'pool', 'history'].forEach(t => {
-                document.getElementById(`tab-${t}`).classList.add('hidden');
-                const btn = document.getElementById(`nav-${t}`);
-                btn.classList.remove('border-indigo-600', 'text-indigo-600');
-                btn.classList.add('border-transparent', 'text-slate-500');
-            });
-            document.getElementById(`tab-${tabKey}`).classList.remove('hidden');
-            const activeBtn = document.getElementById(`nav-${tabKey}`);
-            activeBtn.classList.add('border-indigo-600', 'text-indigo-600');
-            activeBtn.classList.remove('border-transparent', 'text-slate-500');
-
-            if (tabKey === 'today') renderTodayTab();
-            if (tabKey === 'pool') renderPoolTab();
-            if (tabKey === 'history') renderHistoryTab();
-        };
-
-        window.changeActiveDate = function() {
-            const val = document.getElementById('selectedDateInput').value;
-            if (val) {
-                activeDateStr = val;
-                updateDateDisplayHeader();
-                renderTodayTab();
-            }
-        };
-
-        function renderAll() {
-            renderTodayTab();
-            renderPoolTab();
-            renderHistoryTab();
-        }
-
-        function renderTodayTab() {
-            if (!dailyData[activeDateStr]) {
-                dailyData[activeDateStr] = {};
-            }
-            const dayGoals = dailyData[activeDateStr];
-            const goalIds = Object.keys(dayGoals);
-
-            document.getElementById('goalCountBadge').textContent = `${goalIds.length} exercise${goalIds.length === 1 ? '' : 's'}`;
-
-            const listContainer = document.getElementById('todayGoalsList');
-            if (goalIds.length === 0) {
-                listContainer.innerHTML = `
-                    <div class="text-center py-10 text-slate-400">
-                        <i class="fa-solid fa-clipboard-list text-3xl mb-2 text-slate-300"></i>
-                        <p class="text-sm">No goals set for this date yet.</p>
-                        <button onclick="openGoalModal()" class="mt-3 text-xs bg-indigo-50 text-indigo-600 font-semibold px-3 py-1.5 rounded-lg hover:bg-indigo-100 transition">Set Today's Goals</button>
-                    </div>
-                `;
-            } else {
-                listContainer.innerHTML = goalIds.map(exId => {
-                    const ex = exercisePool.find(e => e.id === exId) || { name: 'Custom Exercise', unit: 'Reps', category: 'General' };
-                    const goal = dayGoals[exId];
-                    const isDone = goal.completed >= goal.target;
-
-                    return `
-                        <div class="py-4 first:pt-0 last:pb-0 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-                            <div class="flex items-center space-x-3 w-full sm:w-auto">
-                                <button onclick="toggleCompleteGoal('${exId}')" class="w-9 h-9 rounded-xl flex items-center justify-center transition ${isDone ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/20' : 'bg-slate-100 text-slate-400 hover:bg-slate-200'}">
-                                    <i class="fa-solid fa-check text-sm"></i>
-                                </button>
-                                <div>
-                                    <h4 class="font-bold text-slate-800 text-sm ${isDone ? 'line-through text-slate-400' : ''}">${ex.name}</h4>
-                                    <span class="text-xs text-slate-400">${ex.category} • Target: ${goal.target} ${ex.unit}</span>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
-                                <div class="text-right">
-                                    <span class="text-sm font-bold text-slate-700">${goal.completed}</span>
-                                    <span class="text-xs text-slate-400">/ ${goal.target} ${ex.unit}</span>
-                                </div>
-                                <div class="flex items-center gap-1">
-                                    <button onclick="adjustProgress('${exId}', -1)" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-sm transition">-</button>
-                                    <button onclick="adjustProgress('${exId}', 1)" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-sm transition">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            }
-
-            updateOverallProgress(dayGoals);
-            renderProgressChart(dayGoals);
-        }
-
-        function updateOverallProgress(dayGoals) {
-            const goalIds = Object.keys(dayGoals);
-            if (goalIds.length === 0) {
-                document.getElementById('overallPercentage').textContent = '0%';
-                document.getElementById('overallProgressBar').style.width = '0%';
-                document.getElementById('completedSummaryText').textContent = '0 of 0 goals fully completed';
-                document.getElementById('proportionalSummaryText').textContent = '0% total progress credit';
-                return;
-            }
-
-            let fullyCompletedCount = 0;
-            let totalRatioSum = 0;
-
-            goalIds.forEach(id => {
-                const g = dayGoals[id];
-                const ratio = Math.min(1, g.completed / g.target);
-                totalRatioSum += ratio;
-                if (g.completed >= g.target) fullyCompletedCount++;
-            });
-
-            const proportionalPct = Math.round((totalRatioSum / goalIds.length) * 100);
-
-            document.getElementById('overallPercentage').textContent = `${proportionalPct}%`;
-            document.getElementById('overallProgressBar').style.width = `${proportionalPct}%`;
-            document.getElementById('completedSummaryText').textContent = `${fullyCompletedCount} of ${goalIds.length} goals fully completed`;
-            document.getElementById('proportionalSummaryText').textContent = `${proportionalPct}% proportional progress credit`;
-        }
-
-        function renderProgressChart(dayGoals) {
-            const ctx = document.getElementById('progressChart').getContext('2d');
-            const goalIds = Object.keys(dayGoals);
-
-            const labels = goalIds.map(id => {
-                const ex = exercisePool.find(e => e.id === id);
-                return ex ? ex.name : 'Exercise';
-            });
-
-            // Calculate percentage completed for each exercise (capped at 100% for the column height, though text can exceed)
-            const completionPercentages = goalIds.map(id => {
-                const g = dayGoals[id];
-                return Math.min(100, Math.round((g.completed / g.target) * 100));
-            });
-
-            if (progressChartInstance) {
-                progressChartInstance.destroy();
-            }
-
-            progressChartInstance = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels.length > 0 ? labels : ['No Goals Set'],
-                    datasets: [
-                        {
-                            label: 'Completion %',
-                            data: goalIds.length > 0 ? completionPercentages : [0],
-                            backgroundColor: '#6366f1',
-                            borderRadius: 8
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        y: { 
-                            beginAtZero: true, 
-                            max: 100,
-                            grid: { color: '#f1f5f9' }, 
-                            ticks: { 
-                                font: { family: 'Inter' },
-                                callback: function(value) { return value + '%'; }
-                            } 
-                        },
-                        x: { grid: { display: false }, ticks: { font: { family: 'Inter' } } }
-                    }
-                }
-            });
-        }
-
-        window.adjustProgress = function(exId, delta) {
-            if (!dailyData[activeDateStr] || !dailyData[activeDateStr][exId]) return;
-            const goal = dailyData[activeDateStr][exId];
-            goal.completed = Math.max(0, goal.completed + delta);
-            saveData();
-        };
-
-        window.toggleCompleteGoal = function(exId) {
-            if (!dailyData[activeDateStr] || !dailyData[activeDateStr][exId]) return;
-            const goal = dailyData[activeDateStr][exId];
-            if (goal.completed >= goal.target) {
-                goal.completed = 0;
-            } else {
-                goal.completed = goal.target;
-            }
-            saveData();
-        };
-
-        function renderPoolTab() {
-            const grid = document.getElementById('exercisePoolGrid');
-            grid.innerHTML = exercisePool.map(ex => `
-                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex justify-between items-center">
-                    <div>
-                        <span class="text-xs font-semibold px-2 py-0.5 rounded bg-indigo-50 text-indigo-600">${ex.category}</span>
-                        <h4 class="font-bold text-slate-800 text-base mt-1">${ex.name}</h4>
-                        <span class="text-xs text-slate-400">Unit: ${ex.unit}</span>
-                    </div>
-                    <div class="flex items-center gap-1">
-                        <button onclick="openEditExerciseModal('${ex.id}')" class="w-8 h-8 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition flex items-center justify-center"><i class="fa-solid fa-pen text-xs"></i></button>
-                        <button onclick="deleteExercise('${ex.id}')" class="w-8 h-8 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderHistoryTab() {
-            const dates = Object.keys(dailyData).sort();
-            const logContainer = document.getElementById('historyLogList');
-
-            if (dates.length === 0) {
-                logContainer.innerHTML = '<p class="text-sm text-slate-400 text-center py-6">No historical records yet.</p>';
-            } else {
-                logContainer.innerHTML = dates.slice(-10).reverse().map(dateStr => {
-                    const dayGoals = dailyData[dateStr];
-                    const goalIds = Object.keys(dayGoals);
-                    let totalRatio = 0;
-                    goalIds.forEach(id => {
-                        const g = dayGoals[id];
-                        totalRatio += Math.min(1, g.completed / g.target);
-                    });
-                    const dayPct = goalIds.length > 0 ? Math.round((totalRatio / goalIds.length) * 100) : 0;
-
-                    return `
-                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex justify-between items-center">
-                            <div>
-                                <span class="font-bold text-slate-800 text-sm">${dateStr}</span>
-                                <p class="text-xs text-slate-500">${goalIds.length} exercises tracked</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="text-xs font-bold px-2.5 py-1 rounded-full ${dayPct >= 100 ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-100 text-indigo-700'}">${dayPct}% Complete</span>
-                                <button onclick="jumpToDate('${dateStr}')" class="text-xs text-indigo-600 hover:underline font-medium">View</button>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            }
-
-            renderWeeklyChart();
-        }
-
-        function renderWeeklyChart() {
-            const ctx = document.getElementById('weeklyChart').getContext('2d');
-            const labels = [];
-            const dataVals = [];
-
-            for (let i = 6; i >= 0; i--) {
-                const d = new Date();
-                d.setDate(d.getDate() - i);
-                const dStr = getLocalDateString(d);
-                labels.push(d.toLocaleDateString('en-US', { weekday: 'short' }));
-
-                const dayGoals = dailyData[dStr];
-                if (dayGoals && Object.keys(dayGoals).length > 0) {
-                    const gIds = Object.keys(dayGoals);
-                    let sum = 0;
-                    gIds.forEach(id => sum += Math.min(1, dayGoals[id].completed / dayGoals[id].target));
-                    dataVals.push(Math.round((sum / gIds.length) * 100));
-                } else {
-                    dataVals.push(0);
-                }
-            }
-
-            if (weeklyChartInstance) weeklyChartInstance.destroy();
-
-            weeklyChartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Completion %',
-                        data: dataVals,
-                        borderColor: '#6366f1',
-                        backgroundColor: 'rgba(99, 102, 241, 0.1)',
-                        fill: true,
-                        tension: 0.3,
-                        pointBackgroundColor: '#6366f1',
-                        borderWidth: 3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: { beginAtZero: true, max: 100, grid: { color: '#f1f5f9' }, ticks: { font: { family: 'Inter' } } },
-                        x: { grid: { display: false }, ticks: { font: { family: 'Inter' } } }
-                    }
-                }
-            });
-        }
-
-        window.jumpToDate = function(dateStr) {
-            activeDateStr = dateStr;
-            document.getElementById('selectedDateInput').value = dateStr;
-            updateDateDisplayHeader();
-            switchTab('today');
-        };
-
-        window.openGoalModal = function() {
-            if (!dailyData[activeDateStr]) dailyData[activeDateStr] = {};
-            const dayGoals = dailyData[activeDateStr];
-
-            const container = document.getElementById('goalSelectionList');
-            container.innerHTML = exercisePool.map(ex => {
-                const existing = dayGoals[ex.id];
-                const isChecked = !!existing;
-                const targetVal = existing ? existing.target : (ex.unit === 'Reps' ? 20 : 10);
-
-                return `
-                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
-                        <label class="flex items-center space-x-3 cursor-pointer">
-                            <input type="checkbox" data-exid="${ex.id}" ${isChecked ? 'checked' : ''} class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
-                            <div>
-                                <span class="font-bold text-slate-800 text-sm">${ex.name}</span>
-                                <span class="block text-xs text-slate-400">${ex.category} (${ex.unit})</span>
-                            </div>
-                        </label>
-                        <div class="flex items-center gap-2">
-                            <input type="number" id="target-val-${ex.id}" value="${targetVal}" min="1" class="w-20 bg-white border border-slate-200 rounded-lg px-2.5 py-1 text-sm font-medium text-center focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            <span class="text-xs text-slate-400 w-10">${ex.unit}</span>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-
-            document.getElementById('goalModal').classList.remove('hidden');
-        };
-
-        window.closeGoalModal = function() {
-            document.getElementById('goalModal').classList.add('hidden');
-        };
-
-        window.saveDailyGoals = function() {
-            const container = document.getElementById('goalSelectionList');
-            const checkboxes = container.querySelectorAll('input[type="checkbox"]');
-            
-            if (!dailyData[activeDateStr]) dailyData[activeDateStr] = {};
-            const dayGoals = dailyData[activeDateStr];
-
-            checkboxes.forEach(cb => {
-                const exId = cb.getAttribute('data-exid');
-                const targetInput = document.getElementById(`target-val-${exId}`);
-                const targetVal = parseInt(targetInput.value) || 10;
-
-                if (cb.checked) {
-                    if (!dayGoals[exId]) {
-                        dayGoals[exId] = { target: targetVal, completed: 0 };
-                    } else {
-                        dayGoals[exId].target = targetVal;
-                    }
-                } else {
-                    delete dayGoals[exId];
-                }
-            });
-
-            closeGoalModal();
-            saveData();
-        };
-
-        window.openNewExerciseModal = function() {
-            document.getElementById('exerciseModalTitle').textContent = 'Add New Exercise';
-            document.getElementById('editExerciseId').value = '';
-            document.getElementById('exNameInput').value = '';
-            document.getElementById('exCategoryInput').value = 'Strength';
-            document.getElementById('exUnitInput').value = 'Reps';
-            document.getElementById('exerciseModal').classList.remove('hidden');
-        };
-
-        window.openEditExerciseModal = function(exId) {
-            const ex = exercisePool.find(e => e.id === exId);
-            if (!ex) return;
-            document.getElementById('exerciseModalTitle').textContent = 'Edit Exercise';
-            document.getElementById('editExerciseId').value = ex.id;
-            document.getElementById('exNameInput').value = ex.name;
-            document.getElementById('exCategoryInput').value = ex.category;
-            document.getElementById('exUnitInput').value = ex.unit;
-            document.getElementById('exerciseModal').classList.remove('hidden');
-        };
-
-        window.closeExerciseModal = function() {
-            document.getElementById('exerciseModal').classList.add('hidden');
-        };
-
-        window.saveExercise = function() {
-            const id = document.getElementById('editExerciseId').value;
-            const name = document.getElementById('exNameInput').value.trim();
-            const category = document.getElementById('exCategoryInput').value;
-            const unit = document.getElementById('exUnitInput').value;
-
-            if (!name) return;
-
-            if (id) {
-                const ex = exercisePool.find(e => e.id === id);
-                if (ex) {
-                    ex.name = name;
-                    ex.category = category;
-                    ex.unit = unit;
-                }
-            } else {
-                const newEx = {
-                    id: 'ex-' + Date.now(),
-                    name,
-                    category,
-                    unit
-                };
-                exercisePool.push(newEx);
-            }
-
-            closeExerciseModal();
-            saveData();
-        };
-
-        window.deleteExercise = function(exId) {
-            exercisePool = exercisePool.filter(e => e.id !== exId);
-            saveData();
-        };
-
-        window.openCloudModal = function() {
-            document.getElementById('cloudModal').classList.remove('hidden');
-        };
-
-        window.closeCloudModal = function() {
-            document.getElementById('cloudModal').classList.add('hidden');
-        };
-    </script>
-</body>
-</html>
+                    <select id="exUnitInput" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-
