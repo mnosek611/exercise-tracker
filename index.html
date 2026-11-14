@@ -268,8 +268,8 @@
         let db, auth, userId = 'local-user';
         let useCloud = true;
 
-        // Default Master Exercise Pool with requested exercises & targets
-        let exercisePool = [
+        // Default Master Exercise Pool with exact requested exercises and default target values
+        const defaultExercisePool = [
             { id: 'ex-1', name: 'Push-Ups', category: 'Strength', unit: 'Reps', defaultTarget: 100 },
             { id: 'ex-2', name: 'Squats', category: 'Strength', unit: 'Reps', defaultTarget: 100 },
             { id: 'ex-3', name: 'Kettle Bell Swings', category: 'Strength', unit: 'Reps', defaultTarget: 50 },
@@ -281,6 +281,7 @@
             { id: 'ex-9', name: 'Planks', category: 'Core', unit: 'Mins', defaultTarget: 20 }
         ];
 
+        let exercisePool = [...defaultExercisePool];
         let dailyData = {};
         let activeDateStr = getLocalDateString(new Date());
 
@@ -333,7 +334,12 @@
             onSnapshot(docRef, (docSnap) => {
                 if (docSnap.exists()) {
                     const data = docSnap.data();
-                    if (data.exercisePool) exercisePool = data.exercisePool;
+                    // Merge or ensure default pool items exist if empty/missing
+                    if (data.exercisePool && data.exercisePool.length > 0) {
+                        exercisePool = data.exercisePool;
+                    } else {
+                        exercisePool = [...defaultExercisePool];
+                    }
                     if (data.dailyData) dailyData = data.dailyData;
                 } else {
                     saveToCloud();
@@ -373,7 +379,11 @@
         function loadLocalData() {
             const p = localStorage.getItem('fitness_pool');
             const d = localStorage.getItem('fitness_daily');
-            if (p) exercisePool = JSON.parse(p);
+            if (p) {
+                exercisePool = JSON.parse(p);
+            } else {
+                exercisePool = [...defaultExercisePool];
+            }
             if (d) dailyData = JSON.parse(d);
         }
 
@@ -716,7 +726,7 @@
             if (!dailyData[activeDateStr]) dailyData[activeDateStr] = {};
             const dayGoals = dailyData[activeDateStr];
 
-            checkboxes.exports = checkboxes.forEach(cb => {
+            checkboxes.forEach(cb => {
                 const exId = cb.getAttribute('data-exid');
                 const targetInput = document.getElementById(`target-val-${exId}`);
                 const targetVal = parseInt(targetInput.value) || 10;
