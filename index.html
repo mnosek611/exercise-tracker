@@ -30,9 +30,6 @@
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                <button onclick="openCloudModal()" class="bg-indigo-700 hover:bg-indigo-800 text-indigo-100 text-xs font-medium px-3 py-2 rounded-lg border border-indigo-500 transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-cloud"></i> Sync & GitHub Guide
-                </button>
                 <div id="syncStatus" class="text-xs px-2.5 py-1 rounded-full bg-emerald-500 text-white font-medium flex items-center gap-1">
                     <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span> Ready
                 </div>
@@ -220,39 +217,11 @@
         </div>
     </div>
 
-    <!-- MODAL: Cloud Sync & GitHub Guide -->
-    <div id="cloudModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="px-6 py-4 bg-indigo-900 text-white flex justify-between items-center">
-                <h3 class="font-bold text-lg"><i class="fa-solid fa-cloud mr-2"></i>Cloud Sync & GitHub Guide</h3>
-                <button onclick="closeCloudModal()" class="text-indigo-200 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-            </div>
-            <div class="p-6 overflow-y-auto space-y-4 text-sm text-slate-600 flex-grow">
-                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl">
-                    <h4 class="font-bold text-emerald-800 mb-1"><i class="fa-solid fa-circle-check mr-1.5"></i>Firebase Real-Time Sync Active</h4>
-                    <p class="text-xs text-emerald-700">Your app is connected to Firebase Firestore. Changes on your PC and iPhone sync instantly in real time!</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-slate-800 mb-1">How to Update on GitHub:</h4>
-                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-600">
-                        <li>Save the code above into a file named <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">index.html</code> on your computer.</li>
-                        <li>Go to your repository on <a href="https://github.com" target="_blank" class="text-indigo-600 underline font-medium">github.com</a> (<code class="bg-slate-100 px-1.5 py-0.5 rounded text-slate-800">mnosek611/exercise-tracker</code>).</li>
-                        <li>Click on your existing <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">index.html</code> file, click the pencil icon to <b>Edit</b> (or upload the new file over the old one).</li>
-                        <li>Click <b>Commit changes</b>. GitHub Pages will update your live app within 1 minute!</li>
-                    </ol>
-                </div>
-            </div>
-            <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-end">
-                <button onclick="closeCloudModal()" class="px-5 py-2 text-sm font-medium bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow transition">Got It</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Firebase & Application Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'fitness-goal-tracker-v1';
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
@@ -268,7 +237,8 @@
         let db, auth, userId = 'local-user';
         let useCloud = true;
 
-        // Default Master Exercise Pool with exact requested exercises and default target values
+        // Exact requested exercise pool with specific target values
+        // Push-Ups (100), Squats (100), Kettle Bell Swings (50), Bicep Curls (50), Tricep Curls (50), Burpees (50), Jumping Jacks (100), Stretching (20), Planks (20)
         const defaultExercisePool = [
             { id: 'ex-1', name: 'Push-Ups', category: 'Strength', unit: 'Reps', defaultTarget: 100 },
             { id: 'ex-2', name: 'Squats', category: 'Strength', unit: 'Reps', defaultTarget: 100 },
@@ -334,7 +304,6 @@
             onSnapshot(docRef, (docSnap) => {
                 if (docSnap.exists()) {
                     const data = docSnap.data();
-                    // Merge or ensure default pool items exist if empty/missing
                     if (data.exercisePool && data.exercisePool.length > 0) {
                         exercisePool = data.exercisePool;
                     } else {
@@ -342,6 +311,7 @@
                     }
                     if (data.dailyData) dailyData = data.dailyData;
                 } else {
+                    exercisePool = [...defaultExercisePool];
                     saveToCloud();
                 }
                 renderAll();
@@ -803,14 +773,6 @@
         window.deleteExercise = function(exId) {
             exercisePool = exercisePool.filter(e => e.id !== exId);
             saveData();
-        };
-
-        window.openCloudModal = function() {
-            document.getElementById('cloudModal').classList.remove('hidden');
-        };
-
-        window.closeCloudModal = function() {
-            document.getElementById('cloudModal').classList.add('hidden');
         };
     </script>
 </body>
