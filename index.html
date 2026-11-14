@@ -192,7 +192,7 @@
                 <input type="hidden" id="editExerciseId">
                 <div>
                     <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Exercise Name</label>
-                    <input type="text" id="exNameInput" placeholder="e.g. Push-Ups, Jogging, Planks" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    <input type="text" id="exNameInput" placeholder="e.g. Push-Ups, Squats" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Category</label>
@@ -268,14 +268,17 @@
         let db, auth, userId = 'local-user';
         let useCloud = true;
 
-        // Default Master Exercise Pool
+        // Default Master Exercise Pool with requested exercises & targets
         let exercisePool = [
-            { id: 'ex-1', name: 'Push-Ups', category: 'Strength', unit: 'Reps' },
-            { id: 'ex-2', name: 'Squats', category: 'Strength', unit: 'Reps' },
-            { id: 'ex-3', name: 'Plank', category: 'Core', unit: 'Mins' },
-            { id: 'ex-4', name: 'Jogging / Walk', category: 'Cardio', unit: 'Mins' },
-            { id: 'ex-5', name: 'Pull-Ups', category: 'Strength', unit: 'Reps' },
-            { id: 'ex-6', name: 'Stretching', category: 'Flexibility', unit: 'Mins' }
+            { id: 'ex-1', name: 'Push-Ups', category: 'Strength', unit: 'Reps', defaultTarget: 100 },
+            { id: 'ex-2', name: 'Squats', category: 'Strength', unit: 'Reps', defaultTarget: 100 },
+            { id: 'ex-3', name: 'Kettle Bell Swings', category: 'Strength', unit: 'Reps', defaultTarget: 50 },
+            { id: 'ex-4', name: 'Bicep Curls', category: 'Strength', unit: 'Reps', defaultTarget: 50 },
+            { id: 'ex-5', name: 'Tricep Curls', category: 'Strength', unit: 'Reps', defaultTarget: 50 },
+            { id: 'ex-6', name: 'Burpees', category: 'Cardio', unit: 'Reps', defaultTarget: 50 },
+            { id: 'ex-7', name: 'Jumping Jacks', category: 'Cardio', unit: 'Reps', defaultTarget: 100 },
+            { id: 'ex-8', name: 'Stretching', category: 'Flexibility', unit: 'Mins', defaultTarget: 20 },
+            { id: 'ex-9', name: 'Planks', category: 'Core', unit: 'Mins', defaultTarget: 20 }
         ];
 
         let dailyData = {};
@@ -569,7 +572,7 @@
                     <div>
                         <span class="text-xs font-semibold px-2 py-0.5 rounded bg-orange-50 text-orange-600">${ex.category}</span>
                         <h4 class="font-bold text-slate-800 text-base mt-1">${ex.name}</h4>
-                        <span class="text-xs text-slate-400">Unit: ${ex.unit}</span>
+                        <span class="text-xs text-slate-400">Default Target: ${ex.defaultTarget} ${ex.unit}</span>
                     </div>
                     <div class="flex items-center gap-1">
                         <button onclick="openEditExerciseModal('${ex.id}')" class="w-8 h-8 rounded-lg text-slate-400 hover:text-orange-600 hover:bg-orange-50 transition flex items-center justify-center"><i class="fa-solid fa-pen text-xs"></i></button>
@@ -680,7 +683,7 @@
             container.innerHTML = exercisePool.map(ex => {
                 const existing = dayGoals[ex.id];
                 const isChecked = !!existing;
-                const targetVal = existing ? existing.target : (ex.unit === 'Reps' ? 20 : 10);
+                const targetVal = existing ? existing.target : (ex.defaultTarget || 10);
 
                 return `
                     <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
@@ -777,7 +780,8 @@
                     id: 'ex-' + Date.now(),
                     name,
                     category,
-                    unit
+                    unit,
+                    defaultTarget: 20
                 };
                 exercisePool.push(newEx);
             }
