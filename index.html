@@ -99,7 +99,7 @@
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="font-bold text-slate-800 text-base"><i class="fa-solid fa-chart-column mr-2 text-indigo-600"></i>Exercise Progress Breakdown</h3>
-                    <span class="text-xs text-slate-400">Completed vs Target</span>
+                    <span class="text-xs text-slate-400">Completion % per Exercise</span>
                 </div>
                 <div class="relative h-64 w-full">
                     <canvas id="progressChart"></canvas>
@@ -233,14 +233,12 @@
                     <p class="text-xs text-emerald-700">Your app is connected to Firebase Firestore. Changes on your PC and iPhone sync instantly in real time!</p>
                 </div>
                 <div>
-                    <h4 class="font-bold text-slate-800 mb-1">How to Host on GitHub Pages (Free):</h4>
+                    <h4 class="font-bold text-slate-800 mb-1">How to Update on GitHub:</h4>
                     <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-600">
-                        <li>Go to <a href="https://github.com" target="_blank" class="text-indigo-600 underline font-medium">github.com</a> and log in.</li>
-                        <li>Click <b>+ New</b> in the top left to create a repository named <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">exercise-tracker</code> (Make it Public).</li>
-                        <li>Save this complete HTML page into a file named <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">index.html</code> on your computer.</li>
-                        <li>Upload <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">index.html</code> into your GitHub repository and click <b>Commit changes</b>.</li>
-                        <li>Go to repository <b>Settings > Pages</b>, select branch <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">main</code>, and click <b>Save</b>.</li>
-                        <li>Open your live GitHub Pages link on your iPhone and tap <b>Add to Home Screen</b> in Safari!</li>
+                        <li>Save the code above into a file named <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">index.html</code> on your computer.</li>
+                        <li>Go to your repository on <a href="https://github.com" target="_blank" class="text-indigo-600 underline font-medium">github.com</a> (<code class="bg-slate-100 px-1.5 py-0.5 rounded text-slate-800">mnosek611/exercise-tracker</code>).</li>
+                        <li>Click on your existing <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">index.html</code> file, click the pencil icon to <b>Edit</b> (or upload the new file over the old one).</li>
+                        <li>Click <b>Commit changes</b>. GitHub Pages will update your live app within 1 minute!</li>
                     </ol>
                 </div>
             </div>
@@ -280,7 +278,6 @@
             { id: 'ex-6', name: 'Stretching', category: 'Flexibility', unit: 'Mins' }
         ];
 
-        // Daily Goals Data Store: { 'YYYY-MM-DD': { exerciseId: { target: 50, completed: 30 } } }
         let dailyData = {};
         let activeDateStr = getLocalDateString(new Date());
 
@@ -336,7 +333,7 @@
                     if (data.exercisePool) exercisePool = data.exercisePool;
                     if (data.dailyData) dailyData = data.dailyData;
                 } else {
-                    saveToCloud(); // Initialize default
+                    saveToCloud();
                 }
                 renderAll();
             }, (error) => {
@@ -377,7 +374,6 @@
             if (d) dailyData = JSON.parse(d);
         }
 
-        // Navigation
         window.switchTab = function(tabKey) {
             ['today', 'pool', 'history'].forEach(t => {
                 document.getElementById(`tab-${t}`).classList.add('hidden');
@@ -410,7 +406,6 @@
             renderHistoryTab();
         }
 
-        // TODAY TAB RENDER
         function renderTodayTab() {
             if (!dailyData[activeDateStr]) {
                 dailyData[activeDateStr] = {};
@@ -433,7 +428,6 @@
                 listContainer.innerHTML = goalIds.map(exId => {
                     const ex = exercisePool.find(e => e.id === exId) || { name: 'Custom Exercise', unit: 'Reps', category: 'General' };
                     const goal = dayGoals[exId];
-                    const pct = Math.min(100, Math.round((goal.completed / goal.target) * 100));
                     const isDone = goal.completed >= goal.target;
 
                     return `
@@ -503,8 +497,11 @@
                 return ex ? ex.name : 'Exercise';
             });
 
-            const completedData = goalIds.map(id => dayGoals[id].completed);
-            const targetData = goalIds.map(id => dayGoals[id].target);
+            // Calculate percentage completed for each exercise (capped at 100% for the column height, though text can exceed)
+            const completionPercentages = goalIds.map(id => {
+                const g = dayGoals[id];
+                return Math.min(100, Math.round((g.completed / g.target) * 100));
+            });
 
             if (progressChartInstance) {
                 progressChartInstance.destroy();
@@ -516,15 +513,9 @@
                     labels: labels.length > 0 ? labels : ['No Goals Set'],
                     datasets: [
                         {
-                            label: 'Completed',
-                            data: goalIds.length > 0 ? completedData : [0],
+                            label: 'Completion %',
+                            data: goalIds.length > 0 ? completionPercentages : [0],
                             backgroundColor: '#6366f1',
-                            borderRadius: 8
-                        },
-                        {
-                            label: 'Target Goal',
-                            data: goalIds.length > 0 ? targetData : [0],
-                            backgroundColor: '#e2e8f0',
                             borderRadius: 8
                         }
                     ]
@@ -533,10 +524,18 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { family: 'Inter', size: 12 } } }
+                        legend: { display: false }
                     },
                     scales: {
-                        y: { beginAtZero: true, grid: { color: '#f1f5f9' }, ticks: { font: { family: 'Inter' } } },
+                        y: { 
+                            beginAtZero: true, 
+                            max: 100,
+                            grid: { color: '#f1f5f9' }, 
+                            ticks: { 
+                                font: { family: 'Inter' },
+                                callback: function(value) { return value + '%'; }
+                            } 
+                        },
                         x: { grid: { display: false }, ticks: { font: { family: 'Inter' } } }
                     }
                 }
@@ -561,7 +560,6 @@
             saveData();
         };
 
-        // EXERCISE POOL RENDER
         function renderPoolTab() {
             const grid = document.getElementById('exercisePoolGrid');
             grid.innerHTML = exercisePool.map(ex => `
@@ -579,7 +577,6 @@
             `).join('');
         }
 
-        // HISTORY & TRENDS TAB RENDER
         function renderHistoryTab() {
             const dates = Object.keys(dailyData).sort();
             const logContainer = document.getElementById('historyLogList');
@@ -673,7 +670,6 @@
             switchTab('today');
         };
 
-        // Modal Controls
         window.openGoalModal = function() {
             if (!dailyData[activeDateStr]) dailyData[activeDateStr] = {};
             const dayGoals = dailyData[activeDateStr];
